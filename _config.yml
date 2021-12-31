@@ -1,0 +1,13 @@
+# https://jekyllrb.com/docs/configuration/
+exclude:
+  - LICENSE
+  - README.md
+  - docker-compose.yml
+
+timezone: Asia/Tokyo
+
+future: true
+
+# https://github.com/jekyll/jekyll-sass-converter#configuration-options
+sass:
+  style: compressed

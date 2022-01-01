@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "fixpack": "^4.0.0",
+    "prettier": "^2.5.1"
+  },
+  "private": true,
+  "scripts": {
+    "format": "fixpack && prettier --write '**/*.md'",
+    "lint": "fixpack --dryRun && prettier --check '**/*.md'"
+  }
+}

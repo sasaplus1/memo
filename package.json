@@ -5,7 +5,7 @@
   },
   "private": true,
   "scripts": {
-    "format": "fixpack && prettier --write '**/*.md'",
-    "lint": "fixpack --dryRun && prettier --check '**/*.md'"
+    "format": "fixpack && prettier --write '**/*.+(md|yml)'",
+    "lint": "fixpack --dryRun && prettier --check '**/*.+(md|yml)'"
   }
 }

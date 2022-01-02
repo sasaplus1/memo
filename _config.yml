@@ -14,6 +14,9 @@ future: true
 
 permalink: /memo/:title.html
 
+plugins:
+  - jekyll-sitemap
+
 # https://github.com/jekyll/jekyll-sass-converter#configuration-options
 sass:
   style: compressed

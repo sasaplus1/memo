@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: https://memo.sasaplus1.com/sitemap.xml

@@ -1,11 +1,20 @@
 {
   "devDependencies": {
     "fixpack": "^4.0.0",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "textlint": "^12.1.0",
+    "textlint-rule-preset-ja-technical-writing": "^7.0.0"
   },
   "private": true,
   "scripts": {
-    "format": "fixpack && prettier --write '**/*.+(md|yml)'",
-    "lint": "fixpack --dryRun && prettier --check '**/*.+(md|yml)'"
+    "format": "fixpack && prettier --write '**/*.+(md|yml)' && textlint --fix 'memo/**/*.md'",
+    "lint": "fixpack --dryRun && prettier --check '**/*.+(md|yml)' && textlint --dry-run 'memo/**/*.md'"
+  },
+  "textlint": {
+    "rules": {
+      "preset-ja-technical-writing": true,
+      "ja-technical-writing/ja-no-weak-phrase": false,
+      "ja-technical-writing/sentence-length": false
+    }
   }
 }

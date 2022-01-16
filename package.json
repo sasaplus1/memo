@@ -5,6 +5,10 @@
     "textlint": "^12.1.0",
     "textlint-rule-preset-ja-technical-writing": "^7.0.0"
   },
+  "engines": {
+    "node": "16.x",
+    "yarn": "1.x"
+  },
   "private": true,
   "scripts": {
     "attach:gh-pages": "git worktree add ./docs gh-pages",

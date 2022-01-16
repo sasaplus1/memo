@@ -15,8 +15,14 @@
   "scripts": {
     "attach:gh-pages": "git worktree add ./docs gh-pages",
     "detach:gh-pages": "git worktree remove ./docs",
-    "format": "fixpack && prettier --write '**/*.+(md|yml)' && textlint --fix 'memo/**/*.md'",
-    "lint": "fixpack --dryRun && prettier --check '**/*.+(md|yml)' && textlint --dry-run 'memo/**/*.md'",
+    "format": "run-s format:*",
+    "format:fixpack": "fixpack",
+    "format:prettier": "prettier --write '**/*.+(md|yml)'",
+    "format:textlint": "textlint --fix 'memo/**/*.md'",
+    "lint": "run-s lint:*",
+    "lint:fixpack": "fixpack --dryRun",
+    "lint:prettier": "prettier --check '**/*.+(md|yml)'",
+    "lint:textlint": "textlint --dry-run 'memo/**/*.md'",
     "serve": "npx @11ty/eleventy --serve --port=4000"
   },
   "textlint": {

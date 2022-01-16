@@ -13,6 +13,12 @@
     "node": "16.x",
     "yarn": "1.x"
   },
+  "lint-staged": {
+    "*.+(md|yml)": "prettier --check",
+    "*.md": "textlint --dry-run",
+    "package.json": "fixpack --dryRun",
+    "package-lock.json": "node -e 'process.exitCode = 1'"
+  },
   "private": true,
   "scripts": {
     "attach:gh-pages": "git worktree add ./docs gh-pages",
@@ -27,6 +33,7 @@
     "lint:fixpack": "fixpack --dryRun",
     "lint:prettier": "prettier --check '**/*.+(md|yml)'",
     "lint:textlint": "textlint --dry-run 'memo/**/*.md'",
+    "prepare": "[ -n \"$CI\" ] || husky install",
     "serve": "npx @11ty/eleventy --serve --port=4000"
   },
   "textlint": {

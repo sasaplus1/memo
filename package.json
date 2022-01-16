@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@11ty/eleventy": "^1.0.0",
     "fixpack": "^4.0.0",
     "prettier": "^2.5.1",
     "textlint": "^12.1.0",
@@ -14,7 +15,8 @@
     "attach:gh-pages": "git worktree add ./docs gh-pages",
     "detach:gh-pages": "git worktree remove ./docs",
     "format": "fixpack && prettier --write '**/*.+(md|yml)' && textlint --fix 'memo/**/*.md'",
-    "lint": "fixpack --dryRun && prettier --check '**/*.+(md|yml)' && textlint --dry-run 'memo/**/*.md'"
+    "lint": "fixpack --dryRun && prettier --check '**/*.+(md|yml)' && textlint --dry-run 'memo/**/*.md'",
+    "serve": "npx @11ty/eleventy --serve --port=4000"
   },
   "textlint": {
     "rules": {

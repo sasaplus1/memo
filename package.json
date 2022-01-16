@@ -2,6 +2,8 @@
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
     "fixpack": "^4.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.7",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
     "textlint": "^12.1.0",
@@ -10,6 +12,12 @@
   "engines": {
     "node": "16.x",
     "yarn": "1.x"
+  },
+  "lint-staged": {
+    "*.+(md|yml)": "prettier --check",
+    "*.md": "textlint --dry-run",
+    "package.json": "fixpack --dryRun",
+    "package-lock.json": "node -e 'process.exitCode = 1'"
   },
   "private": true,
   "scripts": {
@@ -25,6 +33,7 @@
     "lint:fixpack": "fixpack --dryRun",
     "lint:prettier": "prettier --check '**/*.+(md|yml)'",
     "lint:textlint": "textlint --dry-run 'memo/**/*.md'",
+    "prepare": "[ -n \"$CI\" ] || husky install",
     "serve": "npx @11ty/eleventy --serve --port=4000"
   },
   "textlint": {

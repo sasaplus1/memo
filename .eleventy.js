@@ -1,5 +1,5 @@
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addPassthroughCopy("src/CNAME");
+  eleventyConfig.addPassthroughCopy('src/CNAME');
 
   eleventyConfig.setBrowserSyncConfig({
     port: 4000,
@@ -7,7 +7,7 @@ module.exports = function (eleventyConfig) {
 
   return {
     dir: {
-      input: "src",
+      input: 'src',
     },
   };
 };

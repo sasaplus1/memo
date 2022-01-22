@@ -19,6 +19,10 @@
     "package.json": "fixpack --dryRun",
     "package-lock.json": "node -e 'process.exitCode = 1'"
   },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
   "private": true,
   "scripts": {
     "attach:gh-pages": "git worktree add ./docs gh-pages",

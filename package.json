@@ -27,6 +27,7 @@
   "scripts": {
     "attach:gh-pages": "git worktree add ./docs gh-pages",
     "build": "npx @11ty/eleventy",
+    "deploy": "npx @11ty/eleventy --output=./docs",
     "detach:gh-pages": "git worktree remove ./docs",
     "fix": "run-s fix:*",
     "fix:fixpack": "fixpack",
@@ -37,6 +38,7 @@
     "lint:fixpack": "fixpack --dryRun",
     "lint:prettier": "prettier --check '**/*.+(js|md|yml)'",
     "lint:textlint": "textlint --dry-run 'memo/**/*.md'",
+    "predeploy": "cd ./docs && git clean -dfx && git rm -rf --ignore-unmatch .",
     "prepare": "[ -n \"$CI\" ] || husky install",
     "serve": "npx @11ty/eleventy --serve"
   },

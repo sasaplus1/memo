@@ -140,3 +140,7 @@ dist
 .pnp.*
 
 
+### sasaplus1/memo
+
+# gh-pages worktree
+/docs/

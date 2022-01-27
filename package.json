@@ -27,6 +27,7 @@
   "scripts": {
     "attach:gh-pages": "git worktree add ./docs gh-pages",
     "build": "npx @11ty/eleventy",
+    "clean": "node -e 'fs.rmSync(`./_site`, { force: true, recursive: true })'",
     "deploy": "npx @11ty/eleventy --output=./docs",
     "detach:gh-pages": "git worktree remove ./docs",
     "fix": "run-s fix:*",

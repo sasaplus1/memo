@@ -11,9 +11,6 @@ on:
 
 jobs:
   manually-deploy:
-    name: manually deploy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: sasaplus1/memo/.github/workflows/caller-deploy.yml@${{ github.event.inputs.ref }}
-        with:
-          ref: ${{ github.event.inputs.ref }}
+    uses: sasaplus1/memo/.github/workflows/caller-deploy.yml@${{ github.event.inputs.ref }}
+    with:
+      ref: ${{ github.event.inputs.ref }}

@@ -10,9 +10,6 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: main
-      - uses: ./.github/workflows/caller-deploy.yml
+      - uses: sasaplus1/memo/.github/workflows/caller-deploy.yml@main
         with:
           ref: main

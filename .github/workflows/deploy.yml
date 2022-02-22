@@ -3,7 +3,7 @@ name: deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -12,4 +12,4 @@ jobs:
     steps:
       - uses: ${{ github.repository }}/.github/workflows/caller-deploy.yml@main
         with:
-          ref: master
+          ref: main

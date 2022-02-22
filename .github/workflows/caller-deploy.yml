@@ -1,17 +1,17 @@
-name: deploy
+name: caller deploy
 
 on:
   workflow_call:
     inputs:
       ref:
-        default: master
+        default: main
         description: target ref
         required: true
         type: string
 
 jobs:
-  deploy:
-    name: deploy
+  caller-deploy:
+    name: caller deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

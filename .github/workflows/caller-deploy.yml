@@ -1,4 +1,4 @@
-name: deploy
+name: caller deploy
 
 on:
   workflow_call:
@@ -10,8 +10,8 @@ on:
         type: string
 
 jobs:
-  deploy:
-    name: deploy
+  caller-deploy:
+    name: caller deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

@@ -1,4 +1,4 @@
-name: deploy
+name: manually deploy
 
 on:
   workflow_dispatch:
@@ -9,8 +9,8 @@ on:
         type: string
 
 jobs:
-  deploy:
-    name: deploy
+  manually-deploy:
+    name: manually deploy
     runs-on: ubuntu-latest
     steps:
       - uses: ${{ github.repository }}/.github/workflows/caller-deploy.yml@main

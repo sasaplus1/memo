@@ -16,6 +16,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.inputs.ref }}
-      - uses: .github/workflows/caller-deploy.yml
+      - uses: ./.github/workflows/caller-deploy.yml
         with:
           ref: ${{ github.event.inputs.ref }}

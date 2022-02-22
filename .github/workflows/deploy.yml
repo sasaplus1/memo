@@ -7,9 +7,6 @@ on:
 
 jobs:
   deploy:
-    name: deploy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: sasaplus1/memo/.github/workflows/caller-deploy.yml@main
-        with:
-          ref: main
+    uses: sasaplus1/memo/.github/workflows/caller-deploy.yml@main
+    with:
+      ref: main

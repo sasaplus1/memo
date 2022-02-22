@@ -1,0 +1,25 @@
+<p>Vim で<a href="https://github.com/thinca/vim-qfreplace">qfreplace</a>と同等の置換をする方法について。</p>
+<p>あるときから Vim に <a href="https://vim-jp.org/vimdoc-ja/quickfix.html#:cdo"><code>:cdo</code></a> が追加されたので、これを使うと QuickFix のリストに対して置換ができる。</p>
+<p><a href="https://stackoverflow.com/a/38559267">https://stackoverflow.com/a/38559267</a> を読んでいて発見した。</p>
+<pre><code class="language-vim">:vimgrep /search/j **/*.txt | cw
+:cdo %s/search/replace/ge
+</code></pre>
+<p>これで QuickFix にある行に対して置換が実行できる。保存を同時にするなら <code>update</code> を追加する。</p>
+<pre><code class="language-vim">:cdo %s/search/replace/ge | update
+</code></pre>
+<p>qfreplace では置換後に保存をすると QuickFix が更新されていたが、これも以下のような関数を実行すると実現できる。</p>
+<pre><code class="language-vim">&quot; QuickFixを更新する
+function! s:update_quickfix() abort
+  let list = map(
+        \   getqflist(),
+        \   'extend(v:val, { &quot;text&quot; : get(getbufline(v:val.bufnr, v:val.lnum), 0) })'
+        \ )
+  call setqflist(list)
+endfunction
+command! -nargs=0 UpdateQuickFix call &lt;SID&gt;update_quickfix()
+</code></pre>
+<p>ほぼそのままだが、 <a href="https://vi.stackexchange.com/a/13663">https://vi.stackexchange.com/a/13663</a> のコードをベースにした。</p>
+<pre><code class="language-vim">:cdo %s/search/replace/ge | UpdateQuickFix
+</code></pre>
+<p>いろいろと書いたが、qfreplace を手が覚えているので切り替えられる気がしない。</p>
+<p>qfreplace が入っていない他人の Vim を使うなどといった特定の場面では役に立つかもしれない。</p>

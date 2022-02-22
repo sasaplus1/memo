@@ -4,20 +4,12 @@ my memo repository
 
 ## How to check the memo
 
-Starting container:
-
 ```console
-$ docker compose up
+$ yarn install --frozen-lockfile
+$ yarn run serve
 ```
 
-Starting jekyll:
-
-```console
-$ docker compose exec jekyll bash
-# jekyll serve
-```
-
-See http://localhost:4000.
+See http://localhost:8080.
 
 ## License
 

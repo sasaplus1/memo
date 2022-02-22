@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       ref:
-        default: master
+        default: main
         description: target ref
         required: true
         type: string

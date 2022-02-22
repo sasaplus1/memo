@@ -13,6 +13,6 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: ${{ github.repository }}/.github/workflows/call-deploy.yml@main
+      - uses: ${{ github.repository }}/.github/workflows/caller-deploy.yml@main
         with:
           ref: ${{ github.event.inputs.ref }}

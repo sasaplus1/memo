@@ -1,0 +1,36 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      ref:
+        required: true
+        default: master
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.ref }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: yarn
+      - run: git config --global user.name 'GitHub Actions'
+      - run: git config --global user.email '<>'
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn run attach:gh-pages
+      - run: yarn run deploy
+      - run: git add .
+        working-directory: ./docs
+      - run: git commit -m deploy --allow-empty
+        working-directory: ./docs
+      - run: git push origin gh-pages
+        working-directory: ./docs

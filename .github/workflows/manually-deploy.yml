@@ -1,9 +1,12 @@
 name: deploy
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
+    inputs:
+      ref:
+        required: true
+        default: master
+        type: string
 
 jobs:
   deploy:
@@ -12,4 +15,4 @@ jobs:
     steps:
       - uses: ${{ github.repository }}/.github/workflows/caller-deploy.yml@main
         with:
-          ref: master
+          ref: ${{ github.event.inputs.ref }}

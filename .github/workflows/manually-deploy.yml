@@ -4,8 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        required: true
         default: main
+        description: target ref
+        required: true
         type: string
 
 jobs:
@@ -13,9 +14,6 @@ jobs:
     name: manually deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.inputs.ref }}
-      - uses: ./.github/workflows/caller-deploy.yml
+      - uses: sasaplus1/memo/.github/workflows/caller-deploy.yml@${{ github.event.inputs.ref }}
         with:
           ref: ${{ github.event.inputs.ref }}

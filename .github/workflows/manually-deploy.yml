@@ -13,6 +13,9 @@ jobs:
     name: manually deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/caller-deploy.yml@main
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.ref }}
+      - uses: .github/workflows/caller-deploy.yml
         with:
           ref: ${{ github.event.inputs.ref }}

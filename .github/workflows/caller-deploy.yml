@@ -28,7 +28,7 @@ jobs:
       - run: yarn run attach:gh-pages
       - run: git clean -dfx
         working-directory: ./docs
-      - run: git rm -rf .
+      - run: git rm -rf --ignore-unmatch .
         working-directory: ./docs
       - run: yarn run deploy
       - run: git add .

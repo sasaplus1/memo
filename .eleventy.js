@@ -5,9 +5,9 @@ module.exports = function (eleventyConfig) {
   return {
     dir: {
       input: 'src',
-      output: 'public',
+      output: 'public'
     },
     templateFormats: ['md', 'njk'],
-    markdownTemplateEngine: 'njk',
+    markdownTemplateEngine: 'njk'
   };
 };

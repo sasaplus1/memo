@@ -1,0 +1,32 @@
+---
+---
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{{ title }} - {{ site.name }}</title>
+    <link rel="canonical" href="{{ site.url }}">
+  </head>
+  <body>
+    <header>
+      <h1>{{ site.name }}</h1>
+    </header>
+    <main role="main">
+      <section>
+        <div>
+          <h2>{{ title }}</h2>
+          <time datetime="{{ createdAt.toISOString() }}">
+            {{- createdAt.toLocaleDateString('ja-JP', { dateStyle: 'long' }) -}}
+          </time>
+        </div>
+        {{ content | safe }}
+      </section>
+    </main>
+    <footer>
+      <small><a href="{{ site.url }}">{{ site.name }}</a> &copy; 2022 sasa+1</small>
+    </footer>
+  </body>
+</html>
+

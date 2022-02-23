@@ -7,7 +7,7 @@ eleventyExcludeFromCollections: true
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ site.name | escape }}</title>
+    <title>{{ site.name }}</title>
     <link rel="canonical" href="{{ site.url }}">
   </head>
   <body>
@@ -17,16 +17,18 @@ eleventyExcludeFromCollections: true
     <main role="main">
       <nav>
         <ul>
-          {%- for post in collections.all %}
+          {%- for post in collections.post | reverse %}
           <li>
-            <h2><a href="{{ post.url }}">{{ post.data.title | escape }}</a></h2>
+            <a href="{{ post.url }}">
+              <h2>{{ post.data.title | escape }}</h2>
+            </a>
           </li>
           {%- endfor %}
         </ul>
       </nav>
     </main>
     <footer>
-      <small><a href="/">{{ site.name }}</a> &copy; 2022 sasa+1</small>
+      <small><a href="{{ site.url }}">{{ site.name }}</a> &copy; 2022 sasa+1</small>
     </footer>
   </body>
 </html>

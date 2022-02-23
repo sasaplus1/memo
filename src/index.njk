@@ -21,6 +21,9 @@ eleventyExcludeFromCollections: true
           <li>
             <a href="{{ post.url }}">
               <h2>{{ post.data.title | escape }}</h2>
+              <time datetime="{{ post.date.toISOString() }}">
+                {{- post.date.toLocaleDateString('ja-JP', { dateStyle: 'long' }) -}}
+              </time>
             </a>
           </li>
           {%- endfor %}

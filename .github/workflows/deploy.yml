@@ -4,9 +4,16 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      ref:
+        default: main
+        description: Target reference
+        required: true
+        type: string
 
 jobs:
   deploy:
-    uses: sasaplus1/memo/.github/workflows/caller-deploy.yml@main
+    uses: sasaplus1/memo/.github/workflows/caller-deploy.yml@${{ github.event.inputs.ref }}
     with:
-      ref: main
+      ref: ${{ github.event.inputs.ref }}

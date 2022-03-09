@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0",
     "fixpack": "^4.0.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.7",

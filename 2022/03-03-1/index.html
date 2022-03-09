@@ -19,38 +19,9 @@
         </div>
         <p>Vim で二重拡張子のファイルを編集することが時々ある。例えば <code>*.ext.njk</code> といった末尾の拡張子がある特定の拡張子で、それの手前にある拡張子がファイル本来の種類を表すもの。</p>
 <p>こういったファイル名のファイルタイプを指定する場合、愚直に設定を書くのなら以下のようになると思う。</p>
-<pre><code class="language-vim">autocmd BufNewFile,BufRead *.html.njk setfiletype html
-autocmd BufNewFile,BufRead *.xml.njk setfiletype xml
-&quot; ...
-</code></pre>
+<pre class="language-vim"><code class="language-vim"><span class="token builtin">autocmd</span> BufNewFile<span class="token punctuation">,</span>BufRead <span class="token operator">*</span><span class="token operator">.</span>html<span class="token operator">.</span>njk <span class="token keyword">setfiletype</span> html<br><span class="token builtin">autocmd</span> BufNewFile<span class="token punctuation">,</span>BufRead <span class="token operator">*</span><span class="token operator">.</span>xml<span class="token operator">.</span>njk <span class="token keyword">setfiletype</span> xml<br><span class="token comment">" ...</span></code></pre>
 <p>上記のような設定をつらつらと記述する面倒は避けたいので、ファイルタイプを自動的に検出するような Vim script を <code>.vimrc</code> に書いた。</p>
-<pre><code class="language-vim">function! s:set_filetype() abort
-  &quot; すでにfiletypeが指定されていたら終了
-  if did_filetype()
-    return
-  endif
-
-  let extension = expand('%:r:e')
-
-  &quot; 拡張子が取得できなかったら終了
-  if empty(extension)
-    return
-  endif
-
-  let filetypes = getcompletion(extension, 'filetype')
-
-  &quot; ファイルタイプが存在しなければ終了
-  if empty(filetypes)
-    return
-  endif
-
-  execute 'setlocal' 'filetype=' . filetypes[0]
-endfunction
-
-if exists('?getcompletion')
-  autocmd BufNewFile,BufRead *.*.njk call &lt;SID&gt;set_filetype()
-endif
-</code></pre>
+<pre class="language-vim"><code class="language-vim"><span class="token keyword">function</span><span class="token operator">!</span> s<span class="token punctuation">:</span><span class="token function">set_filetype</span><span class="token punctuation">(</span><span class="token punctuation">)</span> abort<br>  <span class="token comment">" すでにfiletypeが指定されていたら終了</span><br>  <span class="token keyword">if</span> <span class="token function">did_filetype</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br>    <span class="token keyword">return</span><br>  <span class="token keyword">endif</span><br><br>  <span class="token keyword">let</span> extension <span class="token operator">=</span> <span class="token function">expand</span><span class="token punctuation">(</span><span class="token string">'%:r:e'</span><span class="token punctuation">)</span><br><br>  <span class="token comment">" 拡張子が取得できなかったら終了</span><br>  <span class="token keyword">if</span> <span class="token function">empty</span><span class="token punctuation">(</span>extension<span class="token punctuation">)</span><br>    <span class="token keyword">return</span><br>  <span class="token keyword">endif</span><br><br>  <span class="token keyword">let</span> filetypes <span class="token operator">=</span> <span class="token function">getcompletion</span><span class="token punctuation">(</span>extension<span class="token punctuation">,</span> <span class="token string">'filetype'</span><span class="token punctuation">)</span><br><br>  <span class="token comment">" ファイルタイプが存在しなければ終了</span><br>  <span class="token keyword">if</span> <span class="token function">empty</span><span class="token punctuation">(</span>filetypes<span class="token punctuation">)</span><br>    <span class="token keyword">return</span><br>  <span class="token keyword">endif</span><br><br>  execute <span class="token string">'setlocal'</span> <span class="token string">'filetype='</span> <span class="token operator">.</span> filetypes<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><br><span class="token keyword">endfunction</span><br><br><span class="token keyword">if</span> <span class="token function">exists</span><span class="token punctuation">(</span><span class="token string">'?getcompletion'</span><span class="token punctuation">)</span><br>  <span class="token builtin">autocmd</span> BufNewFile<span class="token punctuation">,</span>BufRead <span class="token operator">*</span><span class="token operator">.</span><span class="token operator">*</span><span class="token operator">.</span>njk <span class="token keyword">call</span> <span class="token operator">&lt;</span>SID<span class="token operator">></span><span class="token function">set_filetype</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br><span class="token keyword">endif</span></code></pre>
 <p><code>getcompletion()</code> という関数を使うと拡張子に対応したファイルタイプの配列が取得できるとのことでこれを使った。</p>
 <p>あとは <code>expand()</code> でカレントバッファのファイル名から拡張子を取得して、組み合わせると目的が達成できた。</p>
 <p>ファイルを開くたびに手動でファイルタイプを指定していて面倒だったが、これからは苦労せずに済む。</p>

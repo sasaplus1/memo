@@ -40,41 +40,7 @@
 </ul>
 <p>上記ではなんとか Safari にて正常に動作させることができた。ただ、アプリ内の WebView では動画の問題は解決できたものの、コントロールの問題は解決できていなかった。</p>
 <p>さらに試して以下のようなコードであれば、動画とコントロールの両方を表示できた。</p>
-<pre><code class="language-ts">// この時点でDOMParserから生成されたvideoタグが既にbodyに追加されているものとする
-
-const videos = document.querySelectorAll('video');
-
-if (videos.length &lt;= 0) {
-  return;
-}
-
-type HTMLVideoElementEx = HTMLVideoElement &amp; {
-  [key: string]: string | boolean;
-};
-
-for (const video of videos) {
-  const videoElement = document.createElement('video') as HTMLVideoElementEx;
-
-  // HACK: videoタグの生成直後に追加するとコントロールが正常に描画される
-  document.body.appendChild(videoElement);
-
-  const attributes = video.attributes;
-
-  for (const attribute of attributes) {
-    const { name, value } = attribute;
-
-    if (name in videoElement) {
-      videoElement[name] =
-        typeof videoElement[name] === 'boolean' ? true : value;
-    } else {
-      videoElement.setAttribute(name, value);
-    }
-  }
-
-  videoElement.append(...video.childNodes);
-  video.replaceWith(videoElement);
-}
-</code></pre>
+<pre class="language-ts"><code class="language-ts"><span class="token comment">// この時点でDOMParserから生成されたvideoタグが既にbodyに追加されているものとする</span><br><br><span class="token keyword">const</span> videos <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">querySelectorAll</span><span class="token punctuation">(</span><span class="token string">'video'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token keyword">if</span> <span class="token punctuation">(</span>videos<span class="token punctuation">.</span>length <span class="token operator">&lt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>  <span class="token keyword">return</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">type</span> <span class="token class-name">HTMLVideoElementEx</span> <span class="token operator">=</span> HTMLVideoElement <span class="token operator">&amp;</span> <span class="token punctuation">{</span><br>  <span class="token punctuation">[</span>key<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">]</span><span class="token operator">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><span class="token punctuation">;</span><br><br><span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> video <span class="token keyword">of</span> videos<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>  <span class="token keyword">const</span> videoElement <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'video'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> HTMLVideoElementEx<span class="token punctuation">;</span><br><br>  <span class="token comment">// HACK: videoタグの生成直後に追加するとコントロールが正常に描画される</span><br>  document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>videoElement<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token keyword">const</span> attributes <span class="token operator">=</span> video<span class="token punctuation">.</span>attributes<span class="token punctuation">;</span><br><br>  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">const</span> attribute <span class="token keyword">of</span> attributes<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    <span class="token keyword">const</span> <span class="token punctuation">{</span> name<span class="token punctuation">,</span> value <span class="token punctuation">}</span> <span class="token operator">=</span> attribute<span class="token punctuation">;</span><br><br>    <span class="token keyword">if</span> <span class="token punctuation">(</span>name <span class="token keyword">in</span> videoElement<span class="token punctuation">)</span> <span class="token punctuation">{</span><br>      videoElement<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">=</span><br>        <span class="token keyword">typeof</span> videoElement<span class="token punctuation">[</span>name<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token string">'boolean'</span> <span class="token operator">?</span> <span class="token boolean">true</span> <span class="token operator">:</span> value<span class="token punctuation">;</span><br>    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span><br>      videoElement<span class="token punctuation">.</span><span class="token function">setAttribute</span><span class="token punctuation">(</span>name<span class="token punctuation">,</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span><br>    <span class="token punctuation">}</span><br>  <span class="token punctuation">}</span><br><br>  videoElement<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token operator">...</span>video<span class="token punctuation">.</span>childNodes<span class="token punctuation">)</span><span class="token punctuation">;</span><br>  video<span class="token punctuation">.</span><span class="token function">replaceWith</span><span class="token punctuation">(</span>videoElement<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre>
 <p>こんなワークアラウンドを実行したくはないが、 Safari が修正されるまでは仕方がない。</p>
 
       </section>

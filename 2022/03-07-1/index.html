@@ -22,18 +22,13 @@
 <p><a href="https://qiita.com/mattn/items/e99e5dc7c4054ba25e7d">:terminal に関する小さい Tips</a>を読むと、端末ウィンドウから特定のエスケープシーケンスと共に JSON 文字列を標準出力に出力するとそれが実現できるとわかった。<a href="https://vim-jp.org/vimdoc-ja/terminal.html#terminal-api">ジョブから Vim へ: JSON API</a>に詳細が書かれている。</p>
 <p>これを簡単に実現するために<a href="https://github.com/sasaplus1/drop-to-vim.sh">https://github.com/sasaplus1/drop-to-vim.sh</a>を作った。</p>
 <p>この <code>drop-to-vim</code> を用いて端末ウィンドウからホストの Vim でファイルを開くには以下のように実行する。</p>
-<pre><code class="language-vim">:terminal&lt;CR&gt;
-</code></pre>
-<pre><code class="language-console">$ drop-to-vim file1.txt file2.txt
-</code></pre>
+<pre class="language-vim"><code class="language-vim"><span class="token punctuation">:</span>terminal<span class="token operator">&lt;</span>CR<span class="token operator">></span></code></pre>
+<pre class="language-bash"><code class="language-bash">$ drop-to-vim file1.txt file2.txt</code></pre>
 <p>これで端末ウィンドウを開いた Vim でファイルが開ける。</p>
 <h2>端末ウィンドウで実行した Vifm からホストの Vim でファイルを開く</h2>
 <p><a href="https://vifm.info/">Vifm</a>という、Vim のような操作感をもつファイラーがある。元々の目的は端末ウィンドウの中で実行した Vifm からファイルを開く時にホストの Vim でファイルを開きたいというものだった。</p>
 <p>これも <a href="https://github.com/sasaplus1/drop-to-vim.sh">https://github.com/sasaplus1/drop-to-vim.sh</a> に同梱の <code>drop-from-vifm</code> で実現できる。<code>vifmrc</code> へ以下のように設定を書く。</p>
-<pre><code class="language-vim">if $VIM_TERMINAL
-  set vicmd=drop-from-vifm
-endif
-</code></pre>
+<pre class="language-vim"><code class="language-vim"><span class="token keyword">if</span> $VIM_TERMINAL<br>  <span class="token keyword">set</span> vicmd<span class="token operator">=</span><span class="token keyword">drop</span><span class="token operator">-</span>from<span class="token operator">-</span>vifm<br><span class="token keyword">endif</span></code></pre>
 <p>Vifm では <code>:help</code> が実行できるが、これは <code>vicmd</code> で指定された Vim に引数を渡して実行するようになっている。単純に <code>vicmd</code> に <code>drop-to-vim</code> を指定すると <code>:help</code> が使えなくなるため専用のコマンドを作った。</p>
 
       </section>

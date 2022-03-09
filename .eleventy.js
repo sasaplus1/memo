@@ -8,6 +8,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/.nojekyll');
   eleventyConfig.addPassthroughCopy('src/CNAME');
 
+  eleventyConfig.addWatchTarget('src/index.css');
+  // wait for esbuild
+  eleventyConfig.setWatchThrottleWaitTime(100);
+
   // ref: https://github.com/11ty/eleventy/issues/1526#issuecomment-731855231
   eleventyConfig.addFilter('inspect', function (content) {
     return util.inspect(content, false, null, false);

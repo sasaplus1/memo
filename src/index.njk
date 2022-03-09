@@ -8,20 +8,21 @@ eleventyExcludeFromCollections: true
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>{{ site.name }}</title>
+    <link rel="stylesheet" href="/index.css">
     <link rel="canonical" href="{{ site.url }}">
   </head>
-  <body>
-    <header>
-      <h1>{{ site.name }}</h1>
+  <body class="index">
+    <header class="header">
+      <h1 class="header__title">{{ site.name }}</h1>
     </header>
-    <main role="main">
+    <main class="main" role="main">
       <nav>
-        <ul>
+        <ul class="post-list">
           {%- for post in collections.post %}
-          <li>
-            <a href="{{ post.url }}">
-              <h2>{{ post.data.title | escape }}</h2>
-              <time datetime="{{ post.data.createdAt.toISOString() }}">
+          <li class="post-list__item">
+            <a class="post-list__link" href="{{ post.url }}">
+              <h2 class="post-list__title">{{ post.data.title | escape }}</h2>
+              <time class="post-list__date" datetime="{{ post.data.createdAt.toISOString() }}">
                 {{- post.data.createdAt.toLocaleDateString('ja-JP', { dateStyle: 'long' }) -}}
               </time>
             </a>
@@ -30,8 +31,9 @@ eleventyExcludeFromCollections: true
         </ul>
       </nav>
     </main>
-    <footer>
+    <footer class="footer">
       <small><a href="{{ site.url }}">{{ site.name }}</a> &copy; 2022 sasa+1</small>
     </footer>
   </body>
 </html>
+{#- vim:set ft=html: -#}

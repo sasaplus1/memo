@@ -18,10 +18,10 @@
     "yarn": "1.x"
   },
   "lint-staged": {
-    "*.+(md|yml)": "prettier --check",
+    "*.+(css|js|md|yml)": "prettier --check",
     "*.md": "textlint --dry-run",
     "package.json": "fixpack --dryRun",
-    "package-lock.json": "node -e 'process.exitCode = 1'"
+    "package-lock.json": "node -e 'process.exitCode = 1;'"
   },
   "prettier": {
     "singleQuote": true,
@@ -34,16 +34,18 @@
     "build:css": "esbuild src/index.css --bundle --minify --watch --outfile=public/index.css",
     "build:eleventy": "npx @11ty/eleventy",
     "clean": "node -e 'fs.rmSync(`./public`, { force: true, recursive: true })'",
-    "deploy": "NODE_ENV=production npx @11ty/eleventy --output=./docs",
+    "deploy": "run-s build:*",
+    "deploy:css": "NODE_ENV=production esbuild src/index.css --bundle --minify --watch --outfile=docs/index.css",
+    "deploy:eleventy": "NODE_ENV=production npx @11ty/eleventy --output=docs",
     "detach:gh-pages": "git worktree remove ./docs",
     "fix": "run-s fix:*",
     "fix:fixpack": "fixpack",
-    "fix:prettier": "prettier --write '**/*.+(js|md|yml)'",
+    "fix:prettier": "prettier --write '**/*.+(css|js|md|yml)'",
     "fix:textlint": "textlint --fix 'src/**/*.md'",
     "lint": "run-s lint:*",
     "lint:eleventy": "npx @11ty/eleventy --dryrun",
     "lint:fixpack": "fixpack --dryRun",
-    "lint:prettier": "prettier --check '**/*.+(js|md|yml)'",
+    "lint:prettier": "prettier --check '**/*.+(css|js|md|yml)'",
     "lint:textlint": "textlint --dry-run 'src/**/*.md'",
     "predeploy": "cd ./docs && git clean -dfx && git rm -rf --ignore-unmatch .",
     "prepare": "[ -n \"$CI\" ] || husky install",

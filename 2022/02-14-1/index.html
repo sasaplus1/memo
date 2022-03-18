@@ -5,23 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Vimでqfreplaceと同等の置換を標準の機能で行う - memo</title>
+    <link rel="stylesheet" href="/index.css">
     <link rel="canonical" href="https://memo.sasaplus1.com/2022/02-14-1/">
   </head>
-  <body>
-    <header>
-      <h1>memo</h1>
+  <body class="post">
+    <header class="header">
+      <h1 class="header__title">memo</h1>
     </header>
-    <main role="main">
-      <section>
-        <div>
-          <h2>Vimでqfreplaceと同等の置換を標準の機能で行う</h2>
-          <time datetime="2022-02-14T00:00:00.000Z">2022年2月14日</time>
+    <main class="main" role="main">
+      <section class="post-block">
+        <div class="post-block__info">
+          <h2 class="post-block__title">Vimでqfreplaceと同等の置換を標準の機能で行う</h2>
+          <time class="post-block__date" datetime="2022-02-14T00:00:00.000Z">2022年2月14日</time>
         </div>
         <p>Vim で<a href="https://github.com/thinca/vim-qfreplace">qfreplace</a>と同等の置換をする方法について。</p>
-<p>あるときから Vim に <a href="https://vim-jp.org/vimdoc-ja/quickfix.html#:cdo"><code>:cdo</code></a> が追加されたので、これを使うと QuickFix のリストに対して置換ができる。</p>
+<p>あるときから Vim に <a href="https://vim-jp.org/vimdoc-ja/quickfix.html#:cdo"><code class="language-">:cdo</code></a> が追加されたので、これを使うと QuickFix のリストに対して置換ができる。</p>
 <p><a href="https://stackoverflow.com/a/38559267">https://stackoverflow.com/a/38559267</a> を読んでいて発見した。</p>
 <pre class="language-vim"><code class="language-vim"><span class="token punctuation">:</span><span class="token keyword">vimgrep</span> <span class="token operator">/</span>search<span class="token operator">/</span><span class="token keyword">j</span> <span class="token operator">*</span><span class="token operator">*</span><span class="token operator">/</span><span class="token operator">*</span><span class="token operator">.</span>txt | <span class="token keyword">cw</span><br><span class="token punctuation">:</span>cdo <span class="token operator">%</span>s<span class="token operator">/</span>search<span class="token operator">/</span>replace<span class="token operator">/</span>ge</code></pre>
-<p>これで QuickFix にある行に対して置換が実行できる。保存を同時にするなら <code>update</code> を追加する。</p>
+<p>これで QuickFix にある行に対して置換が実行できる。保存を同時にするなら <code class="language-">update</code> を追加する。</p>
 <pre class="language-vim"><code class="language-vim"><span class="token punctuation">:</span>cdo <span class="token operator">%</span>s<span class="token operator">/</span>search<span class="token operator">/</span>replace<span class="token operator">/</span>ge | <span class="token keyword">update</span></code></pre>
 <p>qfreplace では置換後に保存をすると QuickFix が更新されていたが、これも以下のような関数を実行すると実現できる。</p>
 <pre class="language-vim"><code class="language-vim"><span class="token comment">" QuickFixを更新する</span><br><span class="token keyword">function</span><span class="token operator">!</span> s<span class="token punctuation">:</span><span class="token function">update_quickfix</span><span class="token punctuation">(</span><span class="token punctuation">)</span> abort<br>  <span class="token keyword">let</span> <span class="token keyword">list</span> <span class="token operator">=</span> <span class="token function">map</span><span class="token punctuation">(</span><br>        \   <span class="token function">getqflist</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>        \   <span class="token string">'extend(v:val, { "text" : get(getbufline(v:val.bufnr, v:val.lnum), 0) })'</span><br>        \ <span class="token punctuation">)</span><br>  <span class="token keyword">call</span> <span class="token function">setqflist</span><span class="token punctuation">(</span><span class="token keyword">list</span><span class="token punctuation">)</span><br><span class="token keyword">endfunction</span><br>command<span class="token operator">!</span> <span class="token operator">-</span>nargs<span class="token operator">=</span><span class="token number">0</span> UpdateQuickFix <span class="token keyword">call</span> <span class="token operator">&lt;</span>SID<span class="token operator">></span><span class="token function">update_quickfix</span><span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
@@ -32,9 +33,8 @@
 
       </section>
     </main>
-    <footer>
+    <footer class="footer">
       <small><a href="https://memo.sasaplus1.com">memo</a> &copy; 2022 sasa+1</small>
     </footer>
   </body>
 </html>
-

@@ -18,7 +18,7 @@ eleventyExcludeFromCollections: true
     <main class="main" role="main">
       <nav>
         <ul class="post-list">
-          {%- for post in collections.post %}
+          {%- for post in collections.post | reverse %}
           <li class="post-list__item">
             <a class="post-list__link" href="{{ post.url }}">
               <h2 class="post-list__title">{{ post.data.title | escape }}</h2>

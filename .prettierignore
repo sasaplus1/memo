@@ -1,0 +1,5 @@
+# gh-pages worktree
+/docs/
+
+# 11ty output directory
+/public/

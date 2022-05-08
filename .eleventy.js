@@ -11,6 +11,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addPassthroughCopy('src/.nojekyll');
   eleventyConfig.addPassthroughCopy('src/CNAME');
+  eleventyConfig.addPassthroughCopy('src/favicon.svg');
 
   eleventyConfig.addWatchTarget('src/index.css');
   // wait for esbuild

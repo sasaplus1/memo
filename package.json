@@ -21,11 +21,19 @@
     "*.+(css|js|md|yml)": "prettier --check",
     "*.md": "textlint --dry-run",
     "package.json": "fixpack --dryRun",
-    "package-lock.json": "node -e 'process.exitCode = 1;'"
+    "package-lock.json": "node -e 'process.exitCode = 1'"
   },
   "prettier": {
     "singleQuote": true,
-    "trailingComma": "none"
+    "trailingComma": "none",
+    "overrides": [
+      {
+        "files": "*.json",
+        "options": {
+          "parser": "json-stringify"
+        }
+      }
+    ]
   },
   "private": true,
   "scripts": {
@@ -40,12 +48,12 @@
     "detach:gh-pages": "git worktree remove ./docs",
     "fix": "run-s fix:*",
     "fix:fixpack": "fixpack",
-    "fix:prettier": "prettier --write './**/*.+(css|js|md|yml)'",
+    "fix:prettier": "prettier --write .",
     "fix:textlint": "textlint --fix './src/**/*.md'",
     "lint": "run-s lint:*",
     "lint:eleventy": "npx @11ty/eleventy --dryrun",
     "lint:fixpack": "fixpack --dryRun",
-    "lint:prettier": "prettier --check './**/*.+(css|js|md|yml)'",
+    "lint:prettier": "prettier --check .",
     "lint:textlint": "textlint --dry-run './src/**/*.md'",
     "predeploy": "cd ./docs && git clean -dfx && git rm -rf --ignore-unmatch .",
     "prepare": "[ -n \"$CI\" ] || husky install",

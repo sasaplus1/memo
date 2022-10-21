@@ -4,27 +4,35 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
-  deploy:
-    name: deploy
+  build:
+    name: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - uses: actions/setup-node@v3
         with:
           node-version: 16
           cache: yarn
-      - run: git config --global user.name 'github-actions[bot]'
-      - run: git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
       - run: yarn install --frozen-lockfile
-      - run: yarn run attach:gh-pages
+      - run: yarn run clean
       - run: yarn run deploy
-      - run: git add .
-        working-directory: ./docs
-      - run: git commit -m deploy --allow-empty
-        working-directory: ./docs
-      - run: git push origin gh-pages
-        working-directory: ./docs
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: public
+  deploy:
+    name: deploy
+    needs:
+      - build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/deploy-pages@v1
+        id: deployment

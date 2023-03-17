@@ -11,7 +11,7 @@
     "prettier": "^2.5.1",
     "prism-themes": "^1.9.0",
     "sanitize.css": "^13.0.0",
-    "textlint": "^12.1.0",
+    "textlint": "^13.0.0",
     "textlint-rule-preset-ja-technical-writing": "^7.0.0"
   },
   "engines": {

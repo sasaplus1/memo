@@ -19,7 +19,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn run clean
       - run: yarn run deploy
-      - uses: actions/upload-pages-artifact@v1
+      - uses: actions/upload-pages-artifact@v2
         with:
           path: public
   deploy:
